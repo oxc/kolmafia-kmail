@@ -1,0 +1,41 @@
+{
+  "name": "kolmafia-kmail",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/kmail.js",
+  "module": "es/kmail.js",
+  "types": "types/kmail.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "types"
+  ],
+  "scripts": {
+    "watch": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "kolmafia",
+    "kol",
+    "kingdom of loathing",
+    "kmail"
+  ],
+  "author": "Bernhard Frauendienst <kol@nospam.obeliks.de>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "css-select": "^4.1.3",
+    "domhandler": "^4.2.0",
+    "domutils": "^2.7.0",
+    "htmlparser2": "^6.1.0",
+    "kolmafia": "^1.0.11",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/jest": "^26.0.23",
+    "@types/xmldom": "^0.1.30",
+    "jest": "^27.0.4",
+    "typescript": "^4.3.2"
+  }
+}

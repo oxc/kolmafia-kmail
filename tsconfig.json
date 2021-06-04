@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "types/",
+    "rootDir": "src/",
+    "strict": true,
+    "target": "ES5",
+    "lib": ["ES5", "ES2015.Core"]
+  }
+}
