@@ -1,6 +1,8 @@
 node_modules
 
 *.js
+!*.config.js
+
 *.iml
 .idea
 dist
