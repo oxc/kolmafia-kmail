@@ -1,6 +1,6 @@
 import * as CSSselect from "css-select";
 import {parseDocument} from "htmlparser2";
-import {filter, findOne, findOneChild, getOuterHTML, getSiblings, getText, isComment, isTag, isText} from "domutils";
+import {filter, findOne, findOneChild, getOuterHTML, getSiblings, getText, isComment, isTag, isText, textContent} from "domutils";
 import {Comment, Element, Node} from "domhandler/lib/node";
 import {extractItems, extractMeat} from "kolmafia";
 import {KMessage, Player} from "./kmessage";
@@ -26,10 +26,10 @@ export function parseFolder(html: string) {
     const fromTo = CSSselect.selectOne('b:first-of-type', messageRow)!;
     const correspondent = CSSselect.selectOne('a[href^=showplayer.php]', messageRow);
     if (correspondent) {
-      const name = getText(correspondent);
-      const id = getText(correspondent.nextSibling!).replace(/^\s*\(#(\d+)\)\s*\[/, '$1');
+      const name = textContent(correspondent);
+      const id = textContent(correspondent.nextSibling!).replace(/^\s*\(#(\d+)\)\s*\[/, '$1');
       const player: Player = {name, id};
-      const direction = getText(fromTo).trim();
+      const direction = textContent(fromTo).trim();
       if (direction === 'To') {
         to = player;
       } else if (direction === 'From') {
@@ -38,7 +38,7 @@ export function parseFolder(html: string) {
         throw new Error('Who sent this message??');
       }
     } else {
-      from = {name: getText(fromTo).trim()};
+      from = {name: textContent(fromTo).trim()};
     }
 
     const date = new Date((filter(isComment, messageRow, true, 1)[0] as Comment).data);
@@ -53,7 +53,7 @@ export function parseFolder(html: string) {
     const { text: outsideNote } = parseBodyText(body.children);
 
     let insideNote: string | undefined;
-    const insideNoteLabel = findOne((node) => isTag(node) && node.tagName == 'p' && getText(node) === 'Inside Note:', body.children);
+    const insideNoteLabel = findOne((node) => isTag(node) && node.tagName == 'p' && textContent(node) === 'Inside Note:', body.children);
     if (insideNoteLabel) {
       const insideBody = CSSselect.selectOne('+ p', insideNoteLabel) as Element;
       const { text } = parseBodyText(insideBody.children);
@@ -110,7 +110,7 @@ function parseBodyText(nodes: Node[]): { lastNode: Node | undefined; text: strin
       }
     }
     if (CSSselect.is(node, `a[href^=showplayer.php]`)) {
-      text += getText(node).replace(/\n/, ' ');
+      text += textContent(node).replace(/\n/, ' ');
       continue;
     }
     if (node.tagName == 'br') {
