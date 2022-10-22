@@ -1,6 +1,6 @@
 import typescript from '@rollup/plugin-typescript';
 import commonjs from "@rollup/plugin-commonjs";
-import * as pkg from './package.json'
+import pkg from './package.json' assert { type: 'json' };
 
 export default {
   input: 'src/kmail.ts',
