@@ -51,7 +51,7 @@ export function parseFolder(html: string) {
         throw new Error("Who sent this message??");
       }
     } else {
-      from = { name: textContent(fromTo).trim() };
+      from = { name: textContent(fromTo.nextSibling!).trim() };
     }
 
     const date = new Date((filter(isComment, messageRow, true, 1)[0] as Comment).data);
